@@ -51,3 +51,36 @@ test('don\'t allow click if already selected', () => {
     expect(board.state().xIsNext).toBe(false);
     
 })
+
+test('calculate winner', () => {
+    const board = shallow(<Board />);
+    expect(board.instance().calculateWinner(['X','X','O','','','','','',''])).toBe(null);
+    expect(board.instance().calculateWinner(['X','X','X','','','','','',''])).toBe('X');
+    expect(board.instance().calculateWinner(['O','O','X','O','X','X','O','',''])).toBe('O');
+})
+
+test('display winner', () => {
+    const board = mount(<Board />);
+    const winner = board.find('.winner');
+    const s0 = board.find('Square').at(0);
+    const s1 = board.find('Square').at(1);
+    const s2 = board.find('Square').at(2);
+    const s3 = board.find('Square').at(3);
+    const s4 = board.find('Square').at(4);
+    const s5 = board.find('Square').at(5);
+    const s6 = board.find('Square').at(6);
+    const s7 = board.find('Square').at(7);
+    const s8 = board.find('Square').at(8);
+    expect(winner.text()).toBe('');
+    s0.simulate('click');
+    expect(winner.text()).toBe('');
+    s1.simulate('click');
+    expect(winner.text()).toBe('');
+    s3.simulate('click');
+    expect(winner.text()).toBe('');
+    s4.simulate('click');
+    expect(winner.text()).toBe('');
+    s6.simulate('click');
+    expect(winner.text()).toBe('X');
+
+})
