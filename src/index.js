@@ -12,6 +12,3 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-function calculateWinner(squares) {
-    return false;
-}
