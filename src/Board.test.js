@@ -39,3 +39,15 @@ test('x is first, o is second', () => {
     board.find('Square').first().simulate('click');
     expect(board.state().xIsNext).toBe(false);
 });
+
+test('don\'t allow click if already selected', () => {
+    const board = mount(<Board />);
+    const firstSquare = board.find('Square').first();
+    firstSquare.simulate('click');
+    expect(firstSquare.text()).toBe('X');
+    expect(board.state().xIsNext).toBe(false);
+    firstSquare.simulate('click');
+    expect(firstSquare.text()).toBe('X');
+    expect(board.state().xIsNext).toBe(false);
+    
+})
